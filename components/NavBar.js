@@ -24,6 +24,12 @@ export default function NavBar() {
             <Link passHref href="/book/new">
               <Nav.Link>Create Book</Nav.Link>
             </Link>
+            <Link passHref href="/">
+              <Nav.Link>Authors</Nav.Link>
+            </Link>
+            <Link passHref href="/author/New">
+              <Nav.Link>Create Authors</Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
