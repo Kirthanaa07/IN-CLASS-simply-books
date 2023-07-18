@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteBook } from '../api/bookData';
 
-function BookCard({ bookObj, onUpdate }) {
+function BookCard({ bookObj, onUpdate, showButtons }) {
   // FOR DELETE, WE NEED TO REMOVE THE BOOK AND HAVE THE VIEW RERENDER,
   // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
   const deleteThisBook = () => {
@@ -19,18 +19,22 @@ function BookCard({ bookObj, onUpdate }) {
       <Card.Img variant="top" src={bookObj.image} alt={bookObj.title} style={{ height: '400px' }} />
       <Card.Body>
         <Card.Title>{bookObj.title}</Card.Title>
-        <p className="card-text bold">{bookObj.sale && <span>SALE<br /></span> } ${bookObj.price}</p>
-        {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}
-        <Link href={`/book/${bookObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
-        </Link>
-        {/* DYNAMIC LINK TO EDIT THE BOOK DETAILS  */}
-        <Link href={`/book/edit/${bookObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisBook} className="m-2">
-          DELETE
-        </Button>
+        <p className="card-text bold">{bookObj.sale && <span>SALE<br /></span>} ${bookObj.price}</p>
+        {
+          showButtons ? (
+            <>
+              <Link href={`/book/${bookObj.firebaseKey}`} passHref>
+                <Button variant="primary" className="m-2">VIEW</Button>
+              </Link>
+              <Link href={`/book/edit/${bookObj.firebaseKey}`} passHref>
+                <Button variant="info">EDIT</Button>
+              </Link>
+              <Button variant="danger" onClick={deleteThisBook} className="m-2">
+                DELETE
+              </Button>
+            </>
+          ) : (<></>)
+        }
       </Card.Body>
     </Card>
   );
@@ -44,6 +48,7 @@ BookCard.propTypes = {
     price: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
+  showButtons: PropTypes.bool.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 

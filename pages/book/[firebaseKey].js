@@ -20,12 +20,12 @@ export default function ViewBook() {
       <div className="d-flex flex-column">
         <img src={bookDetails.image} alt={bookDetails.title} style={{ width: '300px' }} />
       </div>
-      <div className="text-white ms-5 details">
+      <div className="text-white ms-5 details d-flex flex-column">
         <h5>
           {bookDetails.title} by {bookDetails.authorObject?.first_name} {bookDetails.authorObject?.last_name}
           {bookDetails.authorObject?.favorite ? ' 🤍' : ''}
         </h5>
-        Author Email: <a href={`mailto:${bookDetails.authorObject?.email}`}>{bookDetails.authorObject?.email}</a>
+        <div>Author Email: <a href={`mailto:${bookDetails.authorObject?.email}`}>{bookDetails.authorObject?.email}</a></div>
         <p>{bookDetails.description || ''}</p>
         <hr />
         <p>
